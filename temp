@@ -1,0 +1,107 @@
+
+const recordingOptions = {
+  android: {
+    extension: '.wav',
+    outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+    audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+    sampleRate: 16000,
+    numberOfChannels: 1,
+    bitRate: 256000,
+  },
+  ios: {
+    extension: '.wav',
+    audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+    sampleRate: 16000,
+    numberOfChannels: 1,
+    bitRate: 128000,
+    linearPCMBitDepth: 16,
+    linearPCMIsBigEndian: false,
+    linearPCMIsFloat: false,
+  },
+}
+getTranscription = async () => {
+    const files = await FileSystem.readAsStringAsync(this.recording.getURI(),{
+      encoding: FileSystem.EncodingType.Base64
+ })
+    //console.log(files)
+    var configs = {
+      method: 'post',
+      url: endpoint_voice,
+      headers:{ 
+        'Ocp-Apim-Subscription-Key': subscription_key_voice,
+        'Content-Type': 'application/octet-stream'
+      },
+      data :{
+        uri: this.recording.getURI()
+      }
+    };
+    axios(configs)
+    .then(function (response) {
+      console.log("hi")
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      console.log(error.response.data);
+    });
+    if(this.state.lang==='english'){
+      this.setState({
+        lang : 'hindi',
+        langcode : 'hi'
+      })
+    }else{
+      this.setState({
+        lang : 'english',
+        langcode : 'en'
+      })
+    }
+    Speech.speak("Okay, changing language to "+this.state.lang)
+    // const playbackInstance = new Audio.Sound()
+    // const source = {
+    //   uri: this.recording.getURI()
+    // }
+    // const status = {
+    //   shouldPlay: false,
+    //   volume: 1.0
+    // }
+    // await playbackInstance.loadAsync(source, status, false)
+    // playbackInstance.playAsync()
+  }
+
+  
+  setRefreshing = (val)=>{
+    this.refreshing = val;
+  }
+  startRecording = async () => {
+    if (!this.state.hasRecordingPermission) return
+    
+    this.setState({ isRecording: true })
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: true,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      playsInSilentModeIOS: false,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      playThroughEarpieceAndroid: false,
+    })
+    const recording = new Audio.Recording();
+    try {
+      await recording.prepareToRecordAsync(recordingOptions)
+      await recording.startAsync()
+    } catch (error) {
+      console.log(error)
+      this.stopRecording()
+    }
+    this.recording = recording
+  }
+  stopRecording = async () => {
+    this.setState({ isRecording: false })
+    try {
+      await this.recording.stopAndUnloadAsync()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  resetRecording = () => {
+    this.deleteRecordingFile()
+    this.recording = null
+  }

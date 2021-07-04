@@ -1,0 +1,19 @@
+{
+    "expo": {
+        "name": "Vision",
+        "icon": "./assets/logo.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "cover",
+            "backgroundColor": "#f0f3f5"
+        },
+        "version": "1.1.6",
+        "slug": "vision",
+        "android": {
+            "package": "com.vision.vision"
+        },
+        "ios": {
+            "bundleIdentifier": "com.vision.vision"
+        }
+    }
+}

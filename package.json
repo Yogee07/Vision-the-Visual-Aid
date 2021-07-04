@@ -1,0 +1,51 @@
+{
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.7.6",
+    "@react-navigation/stack": "^5.9.3",
+    "axios": "^0.21.0",
+    "expo": "~39.0.0",
+    "expo-av": "^8.6.0",
+    "expo-camera": "^9.0.0",
+    "expo-file-system": "^9.2.0",
+    "expo-image-manipulator": "^8.3.0",
+    "expo-keep-awake": "^9.0.0",
+    "expo-location": "^10.0.0",
+    "expo-network": "^3.0.0",
+    "expo-permissions": "^9.3.0",
+    "expo-secure-store": "^9.3.0",
+    "expo-speech": "^8.4.0",
+    "expo-splash-screen": "^0.6.2",
+    "expo-status-bar": "^1.0.3",
+    "expo-updates": "^0.4.2",
+    "https": "^1.0.0",
+    "native-base": "^2.13.14",
+    "react": "~16.13.0",
+    "react-dom": "~16.13.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
+    "react-native-camera": "^3.40.0",
+    "react-native-elements": "^1.2.7",
+    "react-native-fs": "^2.16.6",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-navigation": "^7.1.0",
+    "react-native-reanimated": "^1.13.1",
+    "react-native-safe-area-context": "^3.1.8",
+    "react-native-screens": "^2.11.0",
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-web": "0.13.13",
+    "react-navigation": "^4.4.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.9.0"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo web",
+    "eject": "expo eject"
+  },
+  "private": true
+}
